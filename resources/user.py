@@ -12,7 +12,7 @@ blueprint = Blueprint("users", __name__, description="User operations")
 
 
 @blueprint.route("/user/<int:user_id>")
-class Store(MethodView):
+class User(MethodView):
     @blueprint.response(200, UserResponseSchema)
     def get(self, user_id):
         user = UserModel.query.get_or_404(user_id)
@@ -57,7 +57,7 @@ class UserLogin(MethodView):
     def post(self, user_data):
         user = UserModel.query.filter(UserModel.username == user_data["username"]).first()
         if user and pbkdf2_sha256.verify(user_data["password"], user.password):
-            token = create_access_token(identity=user.id, additional_claims={'role':user.role})
+            token = create_access_token(identity=user.id, additional_claims={'role': user.role})
             return {"token": token}
         abort(401, message="Invalid credentials.")
 
