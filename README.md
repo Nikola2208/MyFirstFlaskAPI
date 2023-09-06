@@ -45,6 +45,13 @@ After successful initialization of database, you are able to run application usi
 flask run
 ```
 
+### Test application
+
+For testing applicaton endpoints and review of their specification, you can enter following URL path in your browser:
+```
+http://localhost:5000/swagger-ui
+```
+
 ## Authors
 
 Contributors:
